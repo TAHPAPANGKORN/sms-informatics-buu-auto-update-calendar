@@ -2,12 +2,12 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/api/index"
-    },
-    {
       "source": "/std/:std_id(\\d+)",
       "destination": "/api/index?std_id=:std_id"
+    },
+    {
+      "source": "/api/preview/:std_id(\\d+)",
+      "destination": "/api/index?std_id=:std_id&format=json"
     }
   ]
 }

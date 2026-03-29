@@ -1,5 +1,6 @@
 from flask import Flask, Response, abort
 import os
+import json
 
 # Robust imports for both local development and Vercel deployment
 try:
@@ -15,17 +16,11 @@ except ImportError:
         from scraper import Scraper
         from calendar_gen import CalendarGenerator
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../public', static_url_path='')
 
-# Serve the landing page from the root directory
 @app.route('/')
 def home():
-    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    index_path = os.path.join(root_dir, 'index.html')
-    if os.path.exists(index_path):
-        with open(index_path, 'r', encoding='utf-8') as f:
-            return f.read()
-    return "Error: index.html not found in root.", 404
+    return app.send_static_file('index.html')
 
 # API: Only handle the calendar generation
 @app.route('/std/<std_id>')
@@ -54,6 +49,25 @@ def get_calendar(std_id):
             "Cache-Control": "no-cache, no-store, must-revalidate",
             "Pragma": "no-cache",
             "Expires": "0"
+        }
+    )
+    
+@app.route('/api/preview/<std_id>')
+def preview(std_id):
+    if not std_id.isdigit():
+        abort(404)
+    
+    scraper = Scraper(std_id)
+    exams = scraper.get_exam_schedule()
+    
+    if exams is None:
+        return Response(json.dumps({"error": "Fetch error"}), status=500, mimetype='application/json')
+    
+    return Response(
+        json.dumps(exams, ensure_ascii=False),
+        mimetype='application/json',
+        headers={
+            "Cache-Control": "no-cache, no-store, must-revalidate"
         }
     )
 
