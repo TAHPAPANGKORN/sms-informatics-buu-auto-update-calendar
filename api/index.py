@@ -1,22 +1,29 @@
 from flask import Flask, send_from_directory, Response, abort
 import os
+import sys
+
+# Add root directory to sys.path so we can import scraper and calendar_gen
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from scraper import Scraper
 from calendar_gen import CalendarGenerator
 
 app = Flask(__name__)
 
+# Create absolute path to public folder (Vercel's root is the working directory)
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PUBLIC_DIR = os.path.join(ROOT_DIR, 'public')
+
 # Serve the landing page
 @app.route('/')
 def index():
-    return send_from_directory('public', 'index.html')
+    return send_from_directory(PUBLIC_DIR, 'index.html')
 
 # Dynamic calendar API
 @app.route('/<std_id>')
 def get_calendar(std_id):
-    # Only allow numeric IDs (safety first)
+    # Only allow numeric IDs
     if not std_id.isdigit():
-        # If it's not a digit, it might be a request for a static asset or just a 404
-        # But for now, we only care about numeric student IDs
         abort(404)
     
     scraper = Scraper(std_id)
