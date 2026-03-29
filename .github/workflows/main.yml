@@ -1,0 +1,32 @@
+name: Update Calendar Daily
+on:
+  schedule:
+    - cron: '0 17 * * *' # รันทุกเที่ยงคืนไทย (17:00 UTC)
+  workflow_dispatch: # ปุ่มกดรันเอง Manual
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+      - name: Run Script
+        env:
+          STUDENT_ID: "67160148" # ใส่รหัสนิสิตของคุณที่นี่
+        run: python main.py
+      - name: Commit and Push
+        run: |
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          git add schedule.ics
+          git commit -m "Auto update calendar" || exit 0
+          git push
