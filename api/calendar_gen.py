@@ -61,13 +61,16 @@ class CalendarGenerator:
                 
             event = Event()
             event.add('summary', f"Exam: {exam['subject']}")
-            event.add('dtstart', start_dt)
-            event.add('dtend', end_dt)
+            
+            # Convert to UTC to avoid needing VTIMEZONE blocks (Standard compliance)
+            event.add('dtstart', start_dt.astimezone(pytz.utc))
+            event.add('dtend', end_dt.astimezone(pytz.utc))
+            event.add('dtstamp', datetime.now(pytz.utc))
+            
             event.add('location', f"Room: {exam['room']}, Seat: {exam['seat']}")
             event.add('description', f"Subject: {exam['subject']}\nRoom: {exam['room']}\nSeat: {exam['seat']}")
             
             # Add UID (Mandatory for Google Calendar and others)
-            # Use student_id + date + subject info for absolute uniqueness
             sub_id = exam['subject'].split('(')[-1].strip(')') if '(' in exam['subject'] else 'sub'
             uid = f"{exam['date']}-{sub_id}@buu-exam-sync"
             event.add('uid', uid)
