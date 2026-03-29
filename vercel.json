@@ -2,8 +2,12 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
       "source": "/:std_id(\\d+)",
-      "destination": "/api/index?std_id=:std_id"
+      "destination": "/api/calendar?std_id=:std_id"
     }
   ]
 }
