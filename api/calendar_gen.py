@@ -66,6 +66,12 @@ class CalendarGenerator:
             event.add('location', f"Room: {exam['room']}, Seat: {exam['seat']}")
             event.add('description', f"Subject: {exam['subject']}\nRoom: {exam['room']}\nSeat: {exam['seat']}")
             
+            # Add UID (Mandatory for Google Calendar and others)
+            # Use a combination of subject info and date to ensure uniqueness
+            sub_id = exam['subject'].split('(')[-1].strip(')') if '(' in exam['subject'] else 'sub'
+            uid = f"{exam['date']}-{sub_id}@buu-exam-sync"
+            event.add('uid', uid)
+            
             cal.add_component(event)
 
         ical_data = cal.to_ical()
