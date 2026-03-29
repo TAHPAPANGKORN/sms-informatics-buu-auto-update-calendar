@@ -16,7 +16,7 @@
 `https://<your-vercel-domain>.vercel.app/<รหัสนิสิต>`
 
 **ตัวอย่าง:**
-`https://sms-if-buu-sync.vercel.app/67160072`
+`https://sms-if-buu-auto-update-calendar.vercel.app/67160072`
 
 ### **ขั้นตอนการติดตั้งใน iPhone / iPad**
 1. คัดลอก URL ด้านบน (ที่เปลี่ยนเป็นรหัสของคุณแล้ว)
