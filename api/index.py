@@ -26,7 +26,7 @@ app = Flask(__name__, static_folder=static_dir, static_url_path='')
 def home():
     # If index.html doesn't exist in public, this might fail, so let's be safe
     try:
-        return app.send_static_file('index.html')
+        return app.send_static_file('public/index.html')
     except Exception:
         return Response("Landing page not found. Please check deployment.", status=404)
 
