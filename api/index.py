@@ -16,11 +16,19 @@ except ImportError:
         from scraper import Scraper
         from calendar_gen import CalendarGenerator
 
-app = Flask(__name__, static_folder='../public', static_url_path='')
+# Define the root path and static folder based on the current file location
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+static_dir = os.path.join(base_dir, 'public')
+
+app = Flask(__name__, static_folder=static_dir, static_url_path='')
 
 @app.route('/')
 def home():
-    return app.send_static_file('index.html')
+    # If index.html doesn't exist in public, this might fail, so let's be safe
+    try:
+        return app.send_static_file('index.html')
+    except Exception:
+        return Response("Landing page not found. Please check deployment.", status=404)
 
 # API: Only handle the calendar generation
 @app.route('/std/<std_id>')
