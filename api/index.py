@@ -16,15 +16,18 @@ except ImportError:
         from scraper import Scraper
         from calendar_gen import CalendarGenerator
 
-# Resolve the absolute path to the project root
-# Now that files are moved out of 'public', root is our static folder.
-PUBLIC_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Local development via Flask static_folder
-app = Flask(__name__, static_folder=PUBLIC_DIR, static_url_path='')
+app = Flask(__name__)
 
-# Vercel handles the home page (index.html) and static assets via vercel.json.
-# This Flask function serves the API and webcal routes.
+@app.route('/')
+def home():
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    index_path = os.path.join(root_dir, 'index.html')
+    if os.path.exists(index_path):
+        with open(index_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    return "Error: index.html not found in root.", 404
 
 # API: Only handle the calendar generation
 @app.route('/std/<std_id>')
