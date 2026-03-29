@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InforExam Sync | ตารางสอบ IF BUU 📅</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Meta -->
+    <meta name="description" content="InforExam Sync - Automated BUU Informatics Exam Calendar Sync">
+    <meta name="theme-color" content="#017aff">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+
+<body data-theme="light">
+
+    <nav class="theme-nav">
+        <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
+            <svg id="sun-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                viewbox="0 0 24 24">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg id="moon-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                viewbox="0 0 24 24" style="display:none">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <main class="container">
+        <div class="card">
+            <header class="header">
+                <div class="logo">
+                    <svg width="48" height="48" viewBox="0 0 32 32">
+                        <defs>
+                            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#017aff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0037bb;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect width="32" height="32" rx="8" fill="url(#logoGradient)" />
+                        <path
+                            d="M9 11C9 10.4477 9.44772 10 10 10H22C22.5523 10 23 10.4477 23 11V22C23 22.5523 22.5523 23 22 23H10C9.44772 23 9 22.5523 9 22V11Z"
+                            fill="white" fill-opacity="0.2" />
+                        <path d="M11 8V10M21 8V10" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+                        <path
+                            d="M16 14.5C14.3431 14.5 13 15.8431 13 17.5C13 19.1569 14.3431 20.5 16 20.5C17.6569 20.5 19 19.1569 19 17.5"
+                            stroke="white" stroke-width="2" stroke-linecap="round" />
+                        <path d="M18 15L19.5 14L20.5 15.5" stroke="white" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <rect x="9" y="10" width="14" height="2" fill="white" fill-opacity="0.4" />
+                    </svg>
+                </div>
+                <h1>InforExam Sync</h1>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+                    เชื่อมต่อตารางสอบ Informatics BUU <br>เข้าปฏิทินของคุณอัตโนมัติ
+                </p>
+            </header>
+
+            <div class="input-block">
+                <label class="label">Student ID / รหัสนิสิต</label>
+                <input type="number" id="std_id" placeholder="Ex. 67160XXX" maxlength="8">
+            </div>
+
+            <div class="btn-list">
+                <button id="apple_btn" class="btn btn-apple" disabled>
+                    <svg width="20" height="20" fill="currentColor" viewbox="0 0 24 24">
+                        <path
+                            d="M18.71 19.5c-.83 1.24-1.71 2.45-3.1 2.48-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .76-3.27.82-1.31.05-2.31-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                    </svg>
+                    Subscribe on Apple
+                </button>
+                <button id="copy_btn" class="btn btn-ghost" disabled>
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"
+                        viewbox="0 0 24 24">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy Calendar Link
+                </button>
+            </div>
+
+            <button id="show_how" class="btn"
+                style="background:transparent; color:var(--text-muted); font-size:0.85rem; margin-top:1.5rem; text-decoration: underline;">
+                วิธีการนำเข้า Google Calendar ?
+            </button>
+
+            <div class="alert">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span>ข้อมูลนี้เป็นการดึงมาอัตโนมัติเพื่อความสะดวก <br>กรุณาตรวจสอบความถูกต้องอีกครั้งที่ <a
+                        href="https://sms.informatics.buu.ac.th" target="_blank"
+                        style="color:var(--accent); font-weight:700;">sms.informatics.buu.ac.th</a></span>
+            </div>
+            <!-- Preview Section -->
+            <section id="preview" class="preview-area">
+                <div class="preview-header">
+                    <h2 class="preview-title">ตารางสอบของคุณ</h2>
+                    <span id="countdown" class="badge">Loading...</span>
+                </div>
+                <div id="exam-list" class="exam-list">
+                    <!-- Items injected by app.js -->
+                </div>
+
+            </section>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-badges">
+                <div class="footer-badge">
+                    <div class="badge-dot"></div>
+                    Privacy Focus: No IDs stored
+                </div>
+                <div class="footer-badge">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    Source: <a href="https://sms.informatics.buu.ac.th" target="_blank"
+                        style="color:inherit; text-decoration:none; font-weight:700;">SMS Informatics BUU</a>
+                </div>
+            </div>
+
+            <div class="footer-socials">
+                <a href="https://github.com/TAHPAPANGKORN" target="_blank" class="social-link" title="GitHub">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+                    </svg>
+                </a>
+                <a href="mailto:papangkorn.pitjawong.work@gmail.com" class="social-link" title="Contact Support">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+
+            <p class="copyright">
+                Made with <span class="heart">❤️</span> by Papangkorn Pitjawong
+            </p>
+        </footer>
+    </main>
+
+    <!-- Guide Modal -->
+    <div id="guide-modal" class="guide-modal"
+        style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center; padding: 1.5rem;">
+        <div class="guide-content"
+            style="background: var(--surface); border: 1px solid var(--border); border-radius: 32px; padding: 2.5rem; max-width: 500px; width: 100%; position: relative;">
+            <h2 style="margin-bottom: 1.5rem;">Google Calendar Guide</h2>
+            <ul style="list-style: none; text-align: left;">
+                <li style="margin-bottom: 1rem; display: flex; gap: 1rem;">
+                    <div
+                        style="width: 24px; height: 24px; background: var(--primary); color: white; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
+                        1</div>
+                    <span>คัดลอกลิงก์ด้วยปุ่ม <strong>Copy Calendar Link</strong></span>
+                </li>
+                <li style="margin-bottom: 1rem; display: flex; gap: 1rem;">
+                    <div
+                        style="width: 24px; height: 24px; background: var(--primary); color: white; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
+                        2</div>
+                    <span>ไปที่ <a href="https://calendar.google.com" target="_blank"
+                            style="color:var(--primary)">Google Calendar</a> บนคอมพิวเตอร์</span>
+                </li>
+                <li style="margin-bottom: 1rem; display: flex; gap: 1rem;">
+                    <div
+                        style="width: 24px; height: 24px; background: var(--primary); color: white; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
+                        3</div>
+                    <span>กดปุ่ม <strong>+</strong> ข้างปฏิทินอื่น (Other calendars)</span>
+                </li>
+                <li style="margin-bottom: 1rem; display: flex; gap: 1rem;">
+                    <div
+                        style="width: 24px; height: 24px; background: var(--primary); color: white; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;">
+                        4</div>
+                    <span>เลือก <strong>จาก URL</strong> (From URL) แล้ววางลิงก์ลงไป</span>
+                </li>
+            </ul>
+            <button id="close_guide" class="btn btn-primary" style="margin-top:2rem; width:100%">รับทราบ!</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
