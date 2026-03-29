@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, Response, abort
+from flask import Flask, Response, abort
 import os
 
 # Robust imports for both local development and Vercel deployment
@@ -6,12 +6,10 @@ try:
     from .scraper import Scraper
     from .calendar_gen import CalendarGenerator
 except ImportError:
-    # This happens when running locally with 'python3 api/index.py'
     try:
         from scraper import Scraper
         from calendar_gen import CalendarGenerator
     except ImportError:
-        # Fallback for other environments
         import sys
         sys.path.append(os.path.dirname(__file__))
         from scraper import Scraper
@@ -19,22 +17,7 @@ except ImportError:
 
 app = Flask(__name__)
 
-# Create absolute path to public folder
-# On Vercel, the current working directory is usually the root.
-# On local, we determine it relative to this file.
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PUBLIC_DIR = os.path.join(ROOT_DIR, 'public')
-
-# Serve the landing page
-@app.route('/')
-def index():
-    # Attempt to serve from the absolute path
-    if os.path.exists(os.path.join(PUBLIC_DIR, 'index.html')):
-        return send_from_directory(PUBLIC_DIR, 'index.html')
-    # Fallback to local 'public' folder if relative path works
-    return send_from_directory('../public', 'index.html')
-
-# Dynamic calendar API
+# API: Only handle the calendar generation
 @app.route('/<std_id>')
 def get_calendar(std_id):
     # Only allow numeric IDs

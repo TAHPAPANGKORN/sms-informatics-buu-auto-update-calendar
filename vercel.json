@@ -1,6 +1,9 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index" }
+    {
+      "source": "/:std_id(\\d+)",
+      "destination": "/api/index?std_id=:std_id"
+    }
   ]
 }
