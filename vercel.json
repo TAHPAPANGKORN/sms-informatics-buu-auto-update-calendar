@@ -6,7 +6,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/:std_id(\\d+)",
+      "source": "/std/:std_id(\\d+)",
       "destination": "/api/index?std_id=:std_id"
     }
   ]

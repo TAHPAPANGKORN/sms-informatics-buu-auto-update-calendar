@@ -18,7 +18,7 @@ except ImportError:
 app = Flask(__name__)
 
 # API: Only handle the calendar generation
-@app.route('/<std_id>')
+@app.route('/std/<std_id>')
 def get_calendar(std_id):
     # Only allow numeric IDs
     if not std_id.isdigit():

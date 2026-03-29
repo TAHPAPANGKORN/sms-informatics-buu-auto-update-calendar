@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUU Exam Sync | ตารางสอบอินฟอร์ BUU 📅</title>
+    <title>IF BUU Exam Sync</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Noto+Sans+Thai:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -232,13 +232,13 @@
             const originWithProtocol = window.location.origin; // e.g. https://...
             
             if (sid.length >= 8) {
-                // Apple Calendar: webcal:// protocol works best on iOS/macos
-                appleLink.href = `webcal://${host}/${sid}`;
+                // Construct full URLs with /std/ prefix
+                const fullIcsUrl = originWithProtocol + '/std/' + sid;
+                
+                appleLink.href = 'webcal://' + host + '/std/' + sid;
+                googleLink.href = 'https://www.google.com/calendar/render?cid=' + encodeURIComponent(fullIcsUrl);
+                
                 appleLink.removeAttribute('disabled');
-
-                // Google Calendar: render?cid=URL
-                const fullIcsUrl = `${originWithProtocol}/${sid}`;
-                googleLink.href = `https://www.google.com/calendar/render?cid=${encodeURIComponent(fullIcsUrl)}`;
                 googleLink.removeAttribute('disabled');
             } else {
                 appleLink.href = "javascript:void(0)";
