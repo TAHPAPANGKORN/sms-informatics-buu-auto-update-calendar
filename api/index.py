@@ -16,19 +16,25 @@ except ImportError:
         from scraper import Scraper
         from calendar_gen import CalendarGenerator
 
-# Define the root path and static folder based on the current file location
-base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-static_dir = os.path.join(base_dir, 'public')
+# Resolve the absolute path to the 'public' directory
+# This works both on Vercel (/var/task/public) and locally.
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PUBLIC_DIR = os.path.join(os.path.dirname(CURRENT_DIR), 'public')
 
-app = Flask(__name__, static_folder=static_dir, static_url_path='')
+app = Flask(__name__, static_folder=PUBLIC_DIR, static_url_path='')
 
 @app.route('/')
 def home():
-    # If index.html doesn't exist in public, this might fail, so let's be safe
+    # Serve index.html from the static_folder
     try:
-        return app.send_static_file('public/index.html')
-    except Exception:
-        return Response("Landing page not found. Please check deployment.", status=404)
+        return app.send_static_file('index.html')
+    except Exception as e:
+        print(f"Error serving index.html: {e}")
+        # Secondary fallback for Vercel's unique file structure
+        try:
+            return app.send_static_file('public/index.html')
+        except:
+            return Response("InforExam Sync: Page not found. Please check deployment.", status=404)
 
 # API: Only handle the calendar generation
 @app.route('/std/<std_id>')
