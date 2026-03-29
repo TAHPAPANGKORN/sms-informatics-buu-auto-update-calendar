@@ -2,22 +2,6 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/api/index"
-    },
-    {
-      "source": "/css/(.*)",
-      "destination": "/css/$1"
-    },
-    {
-      "source": "/js/(.*)",
-      "destination": "/js/$1"
-    },
-    {
-      "source": "/favicon.svg",
-      "destination": "/favicon.svg"
-    },
-    {
       "source": "/std/:std_id",
       "destination": "/api/index?std_id=:std_id"
     },

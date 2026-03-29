@@ -1,4 +1,4 @@
-from flask import Flask, Response, abort
+from flask import Flask, Response, abort, send_from_directory
 import os
 import json
 
@@ -16,18 +16,20 @@ except ImportError:
         from scraper import Scraper
         from calendar_gen import CalendarGenerator
 
+# Resolve the project root for static file serving
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Local development via Flask static_folder
-app = Flask(__name__)
+# Configure Flask to serve static files (CSS/JS) from the project root
+app = Flask(__name__, static_folder=ROOT_DIR, static_url_path='')
 
 @app.route('/')
 def home():
-    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    index_path = os.path.join(root_dir, 'index.html')
-    if os.path.exists(index_path):
-        with open(index_path, 'r', encoding='utf-8') as f:
-            return f.read()
-    return "Error: index.html not found in root.", 404
+    # Serve index.html from the project root
+    return send_from_directory(ROOT_DIR, 'index.html')
+
+# Vercel handles the home page (index.html) and static assets via vercel.json.
+# This Flask function serves the API and webcal routes.
+
 
 # API: Only handle the calendar generation
 @app.route('/std/<std_id>')
